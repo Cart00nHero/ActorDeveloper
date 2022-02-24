@@ -8,10 +8,15 @@
 import Foundation
 
 actor Scenarist {
-    func send(_ portal: @escaping() -> Void) {
-        portal()
+    fileprivate func writeDown(_ story:@escaping() -> Void) {
+        story()
     }
 }
 class Scenario {
     let scenarist: Scenarist = Scenarist()
+    func tell(_ story:@escaping() -> Void) {
+        Task {
+            await scenarist.writeDown(story)
+        }
+    }
 }
