@@ -7,13 +7,13 @@
 
 import Foundation
 
-actor Scenarist {
-    fileprivate func writeDown(_ story:@escaping() -> Void) {
-        story()
-    }
-}
 class Scenario {
-    let scenarist: Scenarist = Scenarist()
+    private actor Scenarist {
+        func writeDown(_ story:@escaping() -> Void) {
+            story()
+        }
+    }
+    private let scenarist: Scenarist = Scenarist()
     func tell(_ story:@escaping() -> Void) {
         Task {
             await scenarist.writeDown(story)
