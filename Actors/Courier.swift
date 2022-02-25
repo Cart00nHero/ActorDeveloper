@@ -30,12 +30,12 @@ fileprivate class LogisticsCenter {
         }
     }
     func collectParcels(_ recipient: Scenario) -> NSSet {
-        let key = String(describing: type(of: recipient))
-        let parcelSet = NSSet(set: warehouse[key] ?? NSSet())
-        warehouse.removeValue(forKey: key)
+        let nameplate = String(describing: type(of: recipient))
+        let parcelSet = NSSet(set: warehouse[nameplate] ?? NSSet())
+        warehouse.removeValue(forKey: nameplate)
         return parcelSet
     }
-    func cancelExpress<T>(_ recipient:String, _ parcel: Parcel<T>) {
+    func cancelExpress<T>(_ recipient: String, _ parcel: Parcel<T>) {
         guard let parcelSet: NSSet = warehouse[recipient] else { return }
         let newSet = NSMutableSet.init(set: parcelSet)
         if newSet.contains(parcel) {

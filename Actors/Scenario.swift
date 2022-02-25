@@ -9,14 +9,14 @@ import Foundation
 
 class Scenario {
     private actor Scenarist {
-        func writeDown(_ story:@escaping() -> Void) {
-            story()
+        func writeDown(_ plot:@escaping() -> Void) {
+            plot()
         }
     }
     private let scenarist: Scenarist = Scenarist()
-    func tell(_ story:@escaping() -> Void) {
+    func tell(_ plot:@escaping() -> Void) {
         Task {
-            await scenarist.writeDown(story)
+            await scenarist.writeDown(plot)
         }
     }
 }
